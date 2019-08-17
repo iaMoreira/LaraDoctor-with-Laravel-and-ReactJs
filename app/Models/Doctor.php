@@ -61,6 +61,8 @@ class Doctor extends Model
             'phone'             => 'min:15|regex:/^(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})$/i',
             'email'             => $email,
             'crm'               => $crm,
+            "specialties"       => "required|array|min:2",
+            "specialties.*"     => "required|integer|distinct",
             'password'          => 'required|min:8|max:32|required_with:password_confirmation|same:password_confirmation',
         ],
         [
@@ -87,6 +89,11 @@ class Doctor extends Model
             'crm.numeric'               => 'O CRM deve conter apenas números. ',
             'crm.unique'                => 'O CRM já foi inserido. ',
             'crm.required'              => 'Inserir o código do CRM é obrigátorio. ',
+            'specialties.min'           => 'O campo de especialidades deve conter no mínimo duas opções. ',
+            'specialties.array'         => 'O campo de especialidades deve ser uma lista. ',
+            'specialties.required'      => 'O campo de especialidades é obrigatório. ',
+            'specialties.*.integer'     => 'O campo de especialidades deve conter apenas números inteiros. ',
+            'specialties.*.distinct'    => 'O campo de especialidades não pode conter itens ambíguos. ',
         ] );
     }
 
