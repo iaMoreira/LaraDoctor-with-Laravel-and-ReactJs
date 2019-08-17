@@ -3,34 +3,38 @@
 
 <a  href="https://travis-ci.org/laravel/framework"><img  src="https://travis-ci.org/laravel/framework.svg"  alt="Build Status"></a>
 
-<a  href="https://packagist.org/packages/laravel/framework"><img  src="https://poser.pugx.org/laravel/framework/d/total.svg"  alt="Total Downloads"></a>
-
 <a  href="https://packagist.org/packages/laravel/framework"><img  src="https://poser.pugx.org/laravel/framework/v/stable.svg"  alt="Latest Stable Version"></a>
 
-<a  href="https://packagist.org/packages/laravel/framework"><img  src="https://poser.pugx.org/laravel/framework/license.svg"  alt="License"></a>
-</p>
+
 
 ## Instalação
 
 Clone o repositório
+
 `git clone https://github.com/iaMoreira/teste-doctor.git`
 
 Entre na pasta
+
 `cd teste-doctor`
 
 Instale as dependências usando o Composer
+
 `composer install`
 
  Copie o arquivo de exemplo de configuração `.env.example` para `.env` e edite o que for necessário:  
+
 `$ cp .env.example .env `
 
 Gere uma nova chave para aplicação
+
 `php artisan key:generate`
 
   Faça a migração e popule o seu banco de dados
+
 `$ php artisan migrate:refresh --seed`
 
 Caso sua aplicação não esteja dentro do apache inicio o seu próprio servidor:
+
 `$ php artisan serve`
 
 
