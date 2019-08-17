@@ -45,6 +45,7 @@ class DoctorController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->phone = $request->phone;
+            $user->avatar = $request->avatar;
             $user->cpf = $request->cpf;
             $user->role_id = 2;
             $user->birth_date = Carbon::createFromFormat('d/m/Y', $request['birth_date']);
@@ -107,6 +108,7 @@ class DoctorController extends Controller
             $user = $doctor->user;
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->avatar = $request->avatar;
             $user->password = Hash::make($request->password);
             $user->phone = $request->phone;
             $user->cpf = $request->cpf;

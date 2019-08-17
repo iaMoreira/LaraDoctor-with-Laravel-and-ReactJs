@@ -8,90 +8,85 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="container">
+            <h1 ><b>Lista de médicos </b></h1>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+            <div class="row">
+                <div style="background: #ddd; border-radius: 4px; padding: 2rem; " class="col-sm-12 col-md-6 col-lg-3">
+                    <h4><b>Filtros</b></h4>
+                    <hr>
+
+                    <div class="inputsFiltro">
+                    <form action="{{route('search')}}" method="POST">
+
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="" class="col-sm-12 col-form-label"> NOME</label>
+                            <div class="col-sm-12">
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-12 col-form-label"> CRM</label>
+                            <div class="col-sm-12">
+                                <input type="text" name="crm" id="crm" class="form-control @error('crm') is-invalid @enderror" value="{{old('crm')}}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-12 col-form-label">ESPECIALIDADE</label>
+                            <div class="col-sm-12">
+                                <select name="specialty" id="specialty" class="form-control" value="{{old('specialty')}}" data-live-search="true" >
+                                    <option value=""> Selecione uma especialidade</option>
+                                    @foreach($specialties as $specialty)
+                                        <option value="{{ $specialty->id }}"  {{ (collect(old('specialty'))->contains($specialty->id)) ? 'selected':'' }}>{{$specialty->specialty}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div style="text-align: center">
+                            <button class="btn  btn-lg btn-primary" type="submit" >BUSCAR</button>
+                        </div>
+
+                    </form>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
                 </div>
+                <div class="col-sm-12 col-md-6 col-lg-9 " >
+                        <div class="row" style="background: #ddd; border-radius: 4px; padding: 2rem; margin-left: 1rem;">
+                        @foreach ($doctors as $doctor)
+                        <div class="col-sm-4">
+                            <div class="card">
+                                    {{--  <img style="width: auto; height:200px;" src="http://s.glbimg.com/jo/g1/f/original/2010/05/07/meredith-grey.jpg"/>  --}}
+                                    <div id="img_front" onclick="openFile()"  alt="" style="
+                                    background-image: url('{{ ($doctor->user->avatar) ? asset($doctor->user->avatar) : 'http://s.glbimg.com/jo/g1/f/original/2010/05/07/meredith-grey.jpg'}}');
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    border-radius: 4px;
+                                    background-position: center;
+                                    width: 100%;
+                                    height: 200px;
+                                    max-width: 100%;
+                                    max-height: 200px;"></div>
+                                <h6><b>NOME: </b>{{$doctor->user->name}}</h6>
+                                <h6><b>CRM: </b>{{$doctor->crm}}</h6>
+                            </div>
+                        </div>
+                        @endforeach
+                        <div class="col-12 mt-3">
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                            @if(isset($data))
+                            {!!$doctors->appends($data)->links() !!}
+
+                            @else
+                            {!!$doctors->links() !!}
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
