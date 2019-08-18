@@ -1,5 +1,6 @@
 <?php
 
+use App\Specialty;
 use Illuminate\Http\Request;
 
 /*
@@ -18,3 +19,6 @@ use Illuminate\Http\Request;
 // });
 
 Route::resource('doctor', 'DoctorController')->except(['create', 'edit']);
+Route::get('specialties', function () {
+    return response()->json(Specialty::all());
+});
