@@ -21,7 +21,7 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = Doctor::with('user', 'specialties')->get();
-        return response()->json(['doctors' => $doctors]);
+        return response()->json(['doctors' => $doctors], 200);
     }
 
     /**
@@ -67,7 +67,7 @@ class DoctorController extends Controller
             $doctor->user = $user;
             $doctor->specialties =$doctor->specialties;
 
-            return response()->json(['doctor' => $doctor]);
+            return response()->json($doctor, 201);
         } catch (Exception $e) {
             $user->delete();
             return response()->json([ 'error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);

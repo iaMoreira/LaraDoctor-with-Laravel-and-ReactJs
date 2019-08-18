@@ -29,7 +29,7 @@ Gere uma nova chave para aplicação
 
 `php artisan key:generate`
 
-  Faça a migração e popule o seu banco de dados
+ Faça a migração e popule o seu banco de dados
 
 `$ php artisan migrate:refresh --seed`
 
@@ -51,3 +51,8 @@ Caso sua aplicação não esteja dentro do apache inicio o seu próprio servidor
 
 
 
+## Executando Teste TDD 
+
+No diretótio do projeto execute o `phpunit` para executar o script de testes
+
+`$ ./vendor/bin/phpunit`
