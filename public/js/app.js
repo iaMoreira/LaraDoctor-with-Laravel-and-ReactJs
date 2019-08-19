@@ -77911,7 +77911,7 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: ""
-      }, "Especialidades"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, "Especialidades"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], {
         id: "specialties",
         name: "specialties",
         multiple: true,

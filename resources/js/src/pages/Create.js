@@ -235,7 +235,7 @@ export default class Create extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="">Especialidades</label>
-                                        <select
+                                        <Select
                                             id="specialties"
                                             name="specialties"
                                             multiple={true}
@@ -250,7 +250,7 @@ export default class Create extends Component {
                                                     {specialty.specialty}
                                                 </option>
                                             ))}
-                                        </select>
+                                        </Select>
                                     </div>
                                     <button className="btn btn-primary">
                                         Cadastrar
