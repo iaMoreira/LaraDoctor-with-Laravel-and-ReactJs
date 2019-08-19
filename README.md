@@ -56,3 +56,21 @@ Caso sua aplicação não esteja dentro do apache inicio o seu próprio servidor
 No diretótio do projeto execute o `phpunit` para executar o script de testes
 
 `$ ./vendor/bin/phpunit`
+
+
+## Exemplo de teste na API
+
+{
+	"name": "Ian Andrade Moreira",
+	"email": "ianmoreira80@gmail.com",
+	"password": "12345678",
+	"password_confirmation": "12345678",
+	"phone": "(73) 98150-0227",
+	"cpf": "999.999.999-99",
+	"avatar": "https://static.vix.com/pt/sites/default/files/styles/1x1/public/d/deluca-greys-anatomy-0817-1400x700.jpg",
+	"birth_date": "16/04/1998",
+	"crm": "152049",
+	"specialties": [
+		1, 2, 3
+	]
+}
