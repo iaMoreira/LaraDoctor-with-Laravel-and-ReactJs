@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Select from "react-select";
-// import { Container } from './styles';
-import "react-select/dist/react-select.css";
 
 export default class Create extends Component {
     constructor(props) {
@@ -14,6 +12,7 @@ export default class Create extends Component {
             birth_date: "",
             crm: "",
             password: "",
+            password_confirmation: "",
             specialties: [],
             errors: []
         };
@@ -29,6 +28,7 @@ export default class Create extends Component {
             this.setState({
                 specialties: response.data
             });
+            console.log(response.data);
         });
     }
     handleMultiChange(option) {
@@ -213,14 +213,36 @@ export default class Create extends Component {
                                         {this.renderErrorFor("password")}
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="password">
+                                            Confirmar Senha
+                                        </label>
+                                        <input
+                                            type="password"
+                                            className={`form-control ${
+                                                this.hasErrorFor(
+                                                    "password_confirmation"
+                                                )
+                                                    ? "is-invalid"
+                                                    : ""
+                                            }`}
+                                            name="password_confirmation"
+                                            value={this.state.password}
+                                            onChange={this.handleFieldChange}
+                                        />
+                                        {this.renderErrorFor(
+                                            "password_confirmation"
+                                        )}
+                                    </div>
+                                    <div className="form-group">
                                         <label htmlFor="">Especialidades</label>
-                                        <Select
+                                        <select
                                             id="specialties"
                                             name="specialties"
                                             multiple={true}
+                                            value={this.state.specialties}
                                             onChange={this.handleMultiChange}
                                         >
-                                             {specialties.map(specialty => (
+                                            {specialties.map(specialty => (
                                                 <option
                                                     key="{specialty.id}"
                                                     value="{specialty.id}"
@@ -228,7 +250,7 @@ export default class Create extends Component {
                                                     {specialty.specialty}
                                                 </option>
                                             ))}
-                                        </Select>
+                                        </select>
                                     </div>
                                     <button className="btn btn-primary">
                                         Cadastrar

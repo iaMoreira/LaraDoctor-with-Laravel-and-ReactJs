@@ -13,6 +13,13 @@
 
     </head>
     <body>
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
+                <a class="navbar-brand" >
+                    Good Doctor
+                </a>
+            </div>
+        </nav>
         <div class="container">
             <h1 ><b>Lista de médicos </b></h1>
 
@@ -51,6 +58,9 @@
                         </div>
                         <div style="text-align: center">
                             <button class="btn  btn-lg btn-primary" type="submit" >BUSCAR</button>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px">
+                            <a class="btn  btn-success" href="{{url('create')}}" >Cadastrar</a>
                         </div>
 
                     </form>
