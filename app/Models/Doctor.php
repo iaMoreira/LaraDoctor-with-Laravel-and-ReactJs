@@ -60,7 +60,7 @@ class Doctor extends Model
                 'name'              => 'required|max:255',
                 'cpf'               => 'required|regex:/^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2})$/i', // fazer um OU com o CNPJ
                 'birth_date'        => 'before:today|date_format:d/m/Y',
-           //     'phone'             => 'min:15|regex:/^(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})$/i',
+                'phone'             => 'min:15|regex:/^(\([0-9]{2}\))\s([9]{1})?([0-9]{4})-([0-9]{4})$/i',
                 'email'             => $email,
                 'crm'               => $crm,
                 "specialties"       => "required|array|min:2",
