@@ -11,5 +11,4 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::any('/search', 'HomeController@search')->name('search');
+Route::view('/{path?}', 'app');

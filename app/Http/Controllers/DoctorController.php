@@ -35,7 +35,7 @@ class DoctorController extends Controller
         $user = new User();
         try {
             $validator = $doctor->validator($request);
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return response()->json([
                     "error" => 'validation_error',
                     "message" => $validator->errors(),
@@ -49,12 +49,12 @@ class DoctorController extends Controller
             $user->cpf = $request->cpf;
             $user->role_id = 2;
             $user->birth_date = Carbon::createFromFormat('d/m/Y', $request['birth_date']);
-            if(!$user->save()){
+            if (!$user->save()) {
                 return response()->json(['error' => 'error ao criar o usuário'], 400);
             }
             $doctor->crm = $request->crm;
             $doctor->user_id = $user->id;
-            if(!$doctor->save()){
+            if (!$doctor->save()) {
                 $user->delete();
                 return response()->json(['error' => 'error ao cadastrar o médico'], 401);
             }
@@ -65,12 +65,12 @@ class DoctorController extends Controller
             }
 
             $doctor->user = $user;
-            $doctor->specialties =$doctor->specialties;
+            $doctor->specialties = $doctor->specialties;
 
             return response()->json($doctor, 201);
         } catch (Exception $e) {
             $user->delete();
-            return response()->json([ 'error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
+            return response()->json(['error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
         }
     }
 
@@ -83,7 +83,7 @@ class DoctorController extends Controller
     public function show(Doctor $doctor)
     {
         $doctor->user = $doctor->user;
-        $doctor->specialties =$doctor->specialties;
+        $doctor->specialties = $doctor->specialties;
         return response()->json($doctor);
     }
 
@@ -99,7 +99,7 @@ class DoctorController extends Controller
         try {
             $validator = $doctor->validator($request);
 
-            if($validator->fails()){
+            if ($validator->fails()) {
                 return response()->json([
                     "error" => 'validation_error',
                     "message" => $validator->errors(),
@@ -113,12 +113,12 @@ class DoctorController extends Controller
             $user->phone = $request->phone;
             $user->cpf = $request->cpf;
             $user->birth_date = Carbon::createFromFormat('d/m/Y', $request['birth_date']);
-            if(!$user->save()){
+            if (!$user->save()) {
                 return response()->json(['error' => 'error ao atualizar dados do usuário'], 400);
             }
             $doctor->crm = $request->crm;
             $doctor->specialties()->detach();
-            if($request->specialties != null){
+            if ($request->specialties != null) {
                 foreach ($request->specialties as $value) {
                     $specialty = Specialty::findOrFail($value);
                     $doctor->specialties()->attach($specialty);
@@ -127,10 +127,10 @@ class DoctorController extends Controller
 
             $user->password = null;
             $doctor->user = $user;
-            $doctor->specialties =$doctor->specialties;
+            $doctor->specialties = $doctor->specialties;
             return response()->json(['doctor' => $doctor]);
         } catch (Exception $e) {
-            return response()->json([ 'error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
+            return response()->json(['error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
         }
     }
 
@@ -143,15 +143,20 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         try {
-            if($doctor->user->delete()){
+            if ($doctor->user->delete()) {
                 return response()->json(['success' => 'Exclusão bem sucedida!'], 200);
-            }else{
+            } else {
                 return response()->json(['error' => 'error ao deletar o médico.'], 400);
             }
         } catch (Exception $e) {
-            return response()->json([ 'error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
+            return response()->json(['error' => 'Desculpe servidor em manutenção, tente mais tarde.'], 402);
         }
     }
 
-
+    public function search(Request $request, Doctor $doctor)
+    {
+        $data = $request->all();
+        $doctors = $doctor->search($data);
+        return response()->json($doctors);
+    }
 }

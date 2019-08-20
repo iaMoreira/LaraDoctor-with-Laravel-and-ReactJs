@@ -33,7 +33,15 @@ Gere uma nova chave para aplicação
 
 `$ php artisan migrate:refresh --seed`
 
-Caso sua aplicação não esteja dentro do apache inicio o seu próprio servidor:
+Baixe as dependências do `Javascript` 
+
+`$ npm update`
+
+Transpile o código do ReactJS 
+
+`$ npm run dev`
+
+Inicie o seu próprio servidor
 
 `$ php artisan serve`
 
