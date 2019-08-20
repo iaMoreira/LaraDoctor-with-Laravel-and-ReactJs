@@ -1,14 +1,25 @@
-import React from "react";
+import React from 'react';
 import { Link } from "react-router-dom";
 
-const Header = () => (
-    <nav className="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div className="container">
-            <Link className="navbar-brand" to="/">
-                Good Doctor
-            </Link>
-        </div>
-    </nav>
-);
+// import { Container } from './styles';
 
-export default Header;
+export default function Header() {
+  return (
+    <nav className="container navbar navbar-expand-lg navbar-light navbar-laravel">
+    <div className="">
+        <Link className="navbar-brand" to="/">
+            Good Doctor
+        </Link>
+
+    </div>
+    <div className="navbar-collapse" id="navbarNav">
+    <ul className="navbar-nav">
+      <li className="nav-item active">
+        <Link className="nav-link" to="/create">Novo Médico <span className="sr-only">(current)</span></Link>
+      </li>
+     
+    </ul>
+  </div>
+</nav>
+  );
+}
